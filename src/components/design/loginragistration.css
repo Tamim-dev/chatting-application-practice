@@ -1,11 +1,20 @@
 /* ============   Ragistration Start  ============ */
 .inputbox{
     text-align: center;
-    margin-top: 100px;
+    /* margin-top: 100px; */
 }
 
 .textfield{
-    margin: 50px 0;
+    margin: 30px 0;
+}
+
+.MuiTextField-root {
+    width: 325px !important;
+}
+
+.alert{
+    margin: 0 auto;
+    width: 290px ;
 }
 
 /* ============   Ragistration End  ============ */
