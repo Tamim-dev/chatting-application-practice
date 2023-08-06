@@ -8,15 +8,29 @@
     margin: 30px 0;
 }
 
+.textfieldeye{
+    position: relative;
+    margin: 30px 0;
+}
+
 .MuiTextField-root {
     width: 325px !important;
 }
 
 .alert{
-    margin: 0 auto;
+    margin: 20px auto;
     width: 290px ;
 }
 
+.eye{
+    position: absolute;
+    top: 20px;
+    right: 7%;
+}
+
+.MuiGrid-root{
+    justify-content: center;
+}
 /* ============   Ragistration End  ============ */
 
 
