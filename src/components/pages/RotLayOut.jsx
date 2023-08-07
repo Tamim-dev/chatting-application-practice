@@ -17,7 +17,8 @@ import profile from "../../assets/profile.png";
 import Dropdwon from "../layout/Dropdwon";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { userData } from "../../features/userSlice";
 
 const RotLayOut = () => {
     let [logoutRefDropDwon, setLogoutRefDropDwon] = useState(false);
@@ -25,6 +26,7 @@ const RotLayOut = () => {
     let logoutref = useRef();
     let location = useLocation();
     const auth = getAuth();
+    const dispatch = useDispatch();
     let navigate = useNavigate()
 
     useEffect(() => {
@@ -39,7 +41,8 @@ const RotLayOut = () => {
 
     let handelLogOut = ()=>{
         signOut(auth).then(() => {
-            console.log("Sign-out successful.");
+            localStorage.removeItem("user");
+            dispatch(userData(null));
             navigate("/login")
           }).catch((error) => {
             console.log("hoi nai");

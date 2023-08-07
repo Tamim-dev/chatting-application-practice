@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import loginragistration from "../../design/loginragistration.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -9,6 +9,7 @@ import imgp from "../../../assets/react.svg";
 import Alert from "@mui/material/Alert";
 import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
 import Grid from "@mui/system/Unstable_Grid";
+import { useSelector } from "react-redux";
 
 let initialValue = {
     email: "",
@@ -22,6 +23,13 @@ const Ragistration = () => {
     const auth = getAuth();
     let navigate = useNavigate();
     let [values, setValues] = useState(initialValue);
+    let loginUser = useSelector((state) => state.loggedUser.loginUser);
+
+    useEffect(() => {
+        if (loginUser != null) {
+            navigate("/chat/home");
+        }
+    }, []);
 
     let handelChange = (e) => {
         setValues({

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import loginragistration from "../../design/loginragistration.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -9,6 +9,8 @@ import imgp from "../../../assets/react.svg";
 import Alert from "@mui/material/Alert";
 import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
 import Grid from "@mui/system/Unstable_Grid";
+import { useDispatch,useSelector } from "react-redux";
+import { userData } from "../../../features/userSlice";
 
 let initialValue = {
     email: "",
@@ -19,7 +21,15 @@ let initialValue = {
 const Login = () => {
     const auth = getAuth();
     let navigate = useNavigate();
+    const dispatch = useDispatch();
     let [values, setValues] = useState(initialValue);
+    let loginUser = useSelector((state) => state.loggedUser.loginUser);
+
+    useEffect(() => {
+        if (loginUser != null) {
+            navigate("/chat/home");
+        }
+    }, []);
 
     let handelChange = (e) => {
         setValues({
@@ -48,7 +58,10 @@ const Login = () => {
         }
 
         signInWithEmailAndPassword(auth, email, password)
-            .then(() => {
+            .then((user) => {
+                dispatch(userData(user.user));
+                console.log(user.user);
+                localStorage.setItem("user", JSON.stringify(user.user));
                 navigate("/chat/home");
             })
             .catch((error) => {
@@ -101,7 +114,7 @@ const Login = () => {
                     )}
                     {values.error.includes("auth/user-not-found") && (
                         <Alert className="alert" severity="error">
-                         User-not-found
+                            User-not-found
                         </Alert>
                     )}
                 </div>
