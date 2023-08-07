@@ -1,0 +1,53 @@
+/* Homepagedesign */
+.rotlayout {
+    width: 100%;
+    height: 100vh;
+    padding: 50px 40px 0 24px;
+    box-sizing: border-box;
+    box-shadow: 2px 0px 2px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 2px 0px 2px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 2px 0px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.roticon {
+    background: #32375c;
+    padding: 10px;
+    margin-bottom: 14px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 16px;
+}
+.roticonactive {
+    color: #32375c;
+    padding: 10px;
+    margin-bottom: 14px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.rotprofile{
+    margin-top: 230px;
+    display: flex;
+    align-items: center;
+    width: 120%;
+}
+.box{
+    width: 385px;
+    height: 505px;
+    margin-left: 10px;
+    box-shadow: 2px 0px 2px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 2px 0px 2px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 2px 0px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.tilte{
+    display: flex;
+    justify-content: space-between;
+}
