@@ -17,17 +17,30 @@ import profile from "../../assets/profile.png";
 import Dropdwon from "../layout/Dropdwon";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { userData } from "../../features/userSlice";
 
 const RotLayOut = () => {
     let [logoutRefDropDwon, setLogoutRefDropDwon] = useState(false);
+    let userdata = useSelector((state) => state.loggedUser.loginUser);
 
     let logoutref = useRef();
     let location = useLocation();
     const auth = getAuth();
     const dispatch = useDispatch();
     let navigate = useNavigate()
+    let loginUser = useSelector((state) => state.loggedUser.loginUser);
+
+    useEffect(() => {
+        if (loginUser == null) {
+            navigate("/login");
+        }
+    }, []);
+
+    if (loginUser == null) {
+        navigate("/login");
+        return
+    }
 
     useEffect(() => {
         document.body.addEventListener("click", (e) => {
@@ -129,7 +142,7 @@ const RotLayOut = () => {
                         <div className="rotprofile">
                             <img style={{ width: "25%" }} src={profile} />
                             <p style={{ width: "60%", margin: "0 5px 0 8px" }}>
-                                Paula Mora
+                                {userdata.displayName}
                             </p>
                             <Dropdwon dropref={logoutref}>
                                 <AiOutlineSetting

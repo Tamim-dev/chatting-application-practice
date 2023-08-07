@@ -3,7 +3,8 @@ import loginragistration from "../../design/loginragistration.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
+import { getDatabase, push, ref, set } from "firebase/database";
 import { Link, useNavigate } from "react-router-dom";
 import imgp from "../../../assets/react.svg";
 import Alert from "@mui/material/Alert";
@@ -21,6 +22,7 @@ let initialValue = {
 
 const Ragistration = () => {
     const auth = getAuth();
+    const db = getDatabase();
     let navigate = useNavigate();
     let [values, setValues] = useState(initialValue);
     let loginUser = useSelector((state) => state.loggedUser.loginUser);
@@ -65,7 +67,17 @@ const Ragistration = () => {
         }
 
         createUserWithEmailAndPassword(auth, email, password)
-            .then(() => {
+            .then((user) => {
+                updateProfile(auth.currentUser, {
+                    displayName: values.fullName,
+                    photoURL: "https://i.ibb.co/QkwmM1v/Png-Item-1468479.png",
+                }).then(()=>{
+                    set(ref(db, "users/" + user.user.uid), {
+                        username: values.fullName,
+                        email: values.email,
+                        profile_picture: user.user.photoURL,
+                    });
+                })
                 navigate("/login");
             })
             .catch((error) => {
