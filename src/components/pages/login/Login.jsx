@@ -52,7 +52,6 @@ const Login = () => {
                 navigate("/chat/home");
             })
             .catch((error) => {
-                console.log(error.message);
                 if (error.message.includes("(auth/invalid-email)")) {
                     setValues({
                         ...values,
@@ -63,6 +62,12 @@ const Login = () => {
                     setValues({
                         ...values,
                         error: "(auth/wrong-password)",
+                    });
+                }
+                if (error.message.includes("(auth/user-not-found)")) {
+                    setValues({
+                        ...values,
+                        error: "(auth/user-not-found)",
                     });
                 }
             });
@@ -92,6 +97,11 @@ const Login = () => {
                     {values.error.includes("auth/invalid-email") && (
                         <Alert className="alert" severity="error">
                             Email is invalid
+                        </Alert>
+                    )}
+                    {values.error.includes("auth/user-not-found") && (
+                        <Alert className="alert" severity="error">
+                         User-not-found
                         </Alert>
                     )}
                 </div>

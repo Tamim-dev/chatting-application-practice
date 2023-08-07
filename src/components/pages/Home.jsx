@@ -11,7 +11,7 @@ import Blocklist from "../layout/Blocklist";
 const Home = () => {
     return (
         <div>
-            <Grid container spacing={0}>
+            <Grid container>
                 <Grid xs={4}>
                     <Mygroups/>
                     <People/>

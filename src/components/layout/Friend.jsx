@@ -3,6 +3,11 @@ import Button from "@mui/material/Button";
 import profile from "../../assets/profile.png";
 
 const Friend = () => {
+
+    let handelFriendRequest =()=>{
+        
+    }
+
     return (
         <div className="box">
                             <div className="tilte">
@@ -15,8 +20,8 @@ const Friend = () => {
                                     <p>Love You.....</p>
                                 </div>
                                 <div className="profilebtn">
-                                    <Button variant="contained" size="small">
-                                        Join
+                                    <Button onClick={handelFriendRequest} variant="contained" size="small">
+                                        Add
                                     </Button>
                                 </div>
                             </div>
