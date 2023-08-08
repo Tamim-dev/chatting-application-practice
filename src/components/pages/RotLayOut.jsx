@@ -49,6 +49,7 @@ const RotLayOut = () => {
             } else {
                 setLogoutRefDropDwon(false);
             }
+            return
         });
     }, []);
 
