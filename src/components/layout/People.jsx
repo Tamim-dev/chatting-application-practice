@@ -14,12 +14,16 @@ const People = () => {
             let arr =[]
             snapshot.forEach((item)=>{
                 if(userList.uid != item.key){
-                    arr.push(item.val())
+                    arr.push({...item.val(),id:item.key})
                 }
             })
             setUsersArr(arr)
         });
     }, []);
+
+    let handelFriendReq =(item)=>{
+
+    }
     return (
         <div className="box">
             <div className="tilte">
@@ -32,7 +36,7 @@ const People = () => {
                     <h4>{item.username}</h4>
                 </div>
                 <div className="profilebtn">
-                    <Button variant="contained" size="small">
+                    <Button onClick={()=>handelFriendReq(item)} variant="contained" size="small">
                         Add
                     </Button>
                 </div>
