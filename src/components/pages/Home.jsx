@@ -9,22 +9,20 @@ import Blocklist from "../layout/Blocklist";
 
 const Home = () => {
     return (
-        <div>
-            <Grid container>
-                <Grid xs={4}>
-                    <Mygroups />
-                    <People />
-                </Grid>
-                <Grid xs={4}>
-                    <Groups />
-                    <Friendrequests />
-                </Grid>
-                <Grid xs={4}>
-                    <Friend />
-                    <Blocklist />
-                </Grid>
+        <Grid container>
+            <Grid item xs={4}>
+                <Mygroups />
+                <People />
             </Grid>
-        </div>
+            <Grid item xs={4}>
+                <Groups />
+                <Friendrequests />
+            </Grid>
+            <Grid item xs={4}>
+                <Friend />
+                <Blocklist />
+            </Grid>
+        </Grid>
     );
 };
 

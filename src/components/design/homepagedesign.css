@@ -33,14 +33,13 @@
 }
 
 .rotprofile {
-    margin-top: 230px;
+    margin-top: 200px;
     display: flex;
     align-items: center;
-    width: 120%;
+    width: 125%;
     position: relative;
 }
 .box {
-    width: 380px;
     height: 315px;
     margin-left: 10px;
     margin-top: 5px;
@@ -104,8 +103,8 @@
 .btn{
     background: #32375c;
     width: 100px;
-    padding: 10px;
-    font-size: 14px;
+    padding: 9px;
+    font-size: 12px;
     color: #fff;
     box-sizing: border-box;
     display: flex;

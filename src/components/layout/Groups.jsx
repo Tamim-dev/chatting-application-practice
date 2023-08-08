@@ -6,12 +6,12 @@ const Groups = () => {
     return (
         <div className="box">
                             <div className="tilte">
-                                <h2>Group</h2>
+                                <h3>Group</h3>
                             </div>
                             <div className="user">
                                 <img className="profileimg" src={profile} />
                                 <div className="profiletitle">
-                                    <h2>Jenny Wilson</h2>
+                                    <h4>Jenny Wilson</h4>
                                     <p>Love You.....</p>
                                 </div>
                                 <div className="profilebtn">

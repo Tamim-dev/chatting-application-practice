@@ -67,7 +67,7 @@ const RotLayOut = () => {
             <Grid container spacing={0}>
                 <Grid xs={1.5}>
                     <div className="rotlayout">
-                        <h2 style={{ marginBottom: "33px" }}>Chat...</h2>
+                        <h3 style={{ marginBottom: "33px" }}>Chat...</h3>
 
                         <ul>
                             <ol>
@@ -151,7 +151,7 @@ const RotLayOut = () => {
                                 {logoutRefDropDwon && (
                                     <div className="Dropdwon">
                                         <button className="btn" onClick={handelLogOut}>
-                                            <BiLogOut /> Log Out
+                                            <BiLogOut style={{display:"flex", alignItems:"center"}}/> Log Out
                                         </button>
                                     </div>
                                 )}

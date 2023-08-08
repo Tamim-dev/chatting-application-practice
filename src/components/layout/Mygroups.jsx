@@ -6,7 +6,7 @@ const Mygroups = () => {
   return (
     <div className="box">
                         <div className="tilte">
-                            <h2>My Groups</h2>
+                            <h3>My Groups</h3>
                             <Button variant="contained" size="small">
                                 Creact Group
                             </Button>
@@ -14,7 +14,7 @@ const Mygroups = () => {
                         <div className="user">
                             <img className="profileimg" src={profile} />
                             <div className="profiletitle">
-                                <h2>Jenny Wilson</h2>
+                                <h4>Jenny Wilson</h4>
                                 <p>Love You.....</p>
                             </div>
                             <div className="profilebtn">
