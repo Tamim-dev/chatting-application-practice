@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import profile from "../../assets/profile.png";
-import { getDatabase, ref, onValue, set, push } from "firebase/database";
+import {
+    getDatabase,
+    ref,
+    onValue,
+    set,
+    push,
+    remove,
+} from "firebase/database";
 import { useSelector } from "react-redux";
 
 const People = () => {
     const db = getDatabase();
     let [usersArr, setUsersArr] = useState([]);
-    let [friendrequestArr, setFriendrequestArr] = useState([]);
+    let [friendRequestArr, setFriendRequestArr] = useState([]);
+    let [friendsArr, setFriendsArr] = useState([]);
     let userList = useSelector((state) => state.loggedUser.loginUser);
 
     useEffect(() => {
@@ -25,17 +33,28 @@ const People = () => {
             snapshot.forEach((item) => {
                 arr.push(item.val().receiverId + item.val().senderId);
             });
-            setFriendrequestArr(arr);
+            setFriendRequestArr(arr);
+        });
+        onValue(ref(db, "friends/"), (snapshot) => {
+            let arr = [];
+            snapshot.forEach((item) => {
+                arr.push(item.val().receiverId + item.val().senderId);
+            });
+            setFriendsArr(arr);
         });
     }, []);
 
     let handelFriendReq = (item) => {
-        set(push(ref(db, "friendrequest")), {
+        set(ref(db, "friendrequest/" + item.id), {
             senderId: userList.uid,
             senderName: userList.displayName,
             receiverId: item.id,
             receiverName: item.username,
         });
+    };
+
+    let handelFriendReqCancel = (item) => {
+        remove(ref(db, "friendrequest/" + item.id));
     };
     return (
         <div className="box">
@@ -49,13 +68,31 @@ const People = () => {
                         <h4>{item.username}</h4>
                     </div>
                     <div className="profilebtn">
-                        {friendrequestArr.includes(item.id + userList.uid) ? (
+                        {friendRequestArr.includes(item.id + userList.uid) ? (
                             <Button
-                                onClick={() => handelFriendReq(item)}
+                                onClick={() => handelFriendReqCancel(item)}
                                 variant="contained"
                                 size="small"
                             >
                                 Cancel
+                            </Button>
+                        ) : friendRequestArr.includes(
+                              userList.uid + item.id
+                          ) ? (
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                size="small"
+                            >
+                                Panding
+                            </Button>
+                        ) : friendsArr.includes(item.id + userList.uid) || friendsArr.includes(userList.uid + item.id ) ? (
+                            <Button
+                                variant="contained"
+                                size="small"
+                                color="success"
+                            >
+                                Friend
                             </Button>
                         ) : (
                             <Button

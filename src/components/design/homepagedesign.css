@@ -112,3 +112,8 @@
     gap: 10px;
     cursor: pointer;
 }
+
+.frireqebtn{
+    display: flex;
+    gap: 2px;
+}
