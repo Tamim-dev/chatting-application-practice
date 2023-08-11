@@ -16,6 +16,7 @@ const People = () => {
     let [usersArr, setUsersArr] = useState([]);
     let [friendRequestArr, setFriendRequestArr] = useState([]);
     let [friendsArr, setFriendsArr] = useState([]);
+    let [blockArr, setBlockArr] = useState([]);
     let userList = useSelector((state) => state.loggedUser.loginUser);
 
     useEffect(() => {
@@ -41,6 +42,13 @@ const People = () => {
                 arr.push(item.val().receiverId + item.val().senderId);
             });
             setFriendsArr(arr);
+        });
+        onValue(ref(db, "block/"), (snapshot) => {
+            let arr = [];
+            snapshot.forEach((item) => {
+                arr.push(item.val().blockedId + item.val().whoblockId);
+            });
+            setBlockArr(arr);
         });
     }, []);
 
@@ -86,13 +94,19 @@ const People = () => {
                             >
                                 Panding
                             </Button>
-                        ) : friendsArr.includes(item.id + userList.uid) || friendsArr.includes(userList.uid + item.id ) ? (
+                        ) : friendsArr.includes(item.id + userList.uid) ||
+                          friendsArr.includes(userList.uid + item.id) ? (
                             <Button
                                 variant="contained"
                                 size="small"
                                 color="success"
                             >
                                 Friend
+                            </Button>
+                        ) : blockArr.includes(item.id + userList.uid) ||
+                          blockArr.includes(userList.uid + item.id) ? (
+                            <Button variant="contained" color="error" size="small">
+                                Block
                             </Button>
                         ) : (
                             <Button

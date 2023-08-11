@@ -117,3 +117,7 @@
     display: flex;
     gap: 2px;
 }
+
+.MuiOutlinedInput-root{
+    margin-bottom: 15px !important;
+}

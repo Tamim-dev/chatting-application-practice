@@ -55,7 +55,7 @@ const RotLayOut = () => {
 
     let handelLogOut = ()=>{
         signOut(auth).then(() => {
-            localStorage.removeItem("user");
+            localStorage.removeItem("users");
             dispatch(userData(null));
             navigate("/login")
           }).catch((error) => {

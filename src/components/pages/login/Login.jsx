@@ -60,7 +60,7 @@ const Login = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((user) => {
                 dispatch(userData(user.user));
-                localStorage.setItem("user", JSON.stringify(user.user));
+                localStorage.setItem("users", JSON.stringify(user.user));
                 navigate("/chat/home");
             })
             .catch((error) => {

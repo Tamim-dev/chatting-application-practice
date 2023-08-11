@@ -31,6 +31,21 @@ const Friend = () => {
         });
     }, []);
 
+    let handelUnfriend =(item)=>{
+        remove(ref(db, "friends/" + item.id))
+    }
+
+    let handelBlock =(item)=>{
+        set(ref(db, "block/" + item.id),{
+            whoblockId: item.receiverId,
+            whoblockName: item.receiverName,
+            blockedId: item.senderId,
+            blockedName: item.senderName
+        }).then(()=>{
+            remove(ref(db, "friends/" + item.id))
+        })
+    }
+
     return (
         <div className="box">
             <div className="tilte">
@@ -40,15 +55,18 @@ const Friend = () => {
                 <div className="user">
                     <img className="profileimg" src={profile} />
                     <div className="profiletitle">
-                        {item.receiverid == userList.uid ? (
+                        {item.receiverId == userList.uid ? (
                             <h4>{item.senderName}</h4>
                         ) : (
                             <h4>{item.receiverName}</h4>
                         )}
                     </div>
-                    <div className="profilebtn">
-                        <Button variant="contained" size="small">
-                            Add
+                    <div className="frireqebtn">
+                        <Button onClick={()=>handelUnfriend(item)} variant="contained" color="secondary" size="small">
+                            Unfriend
+                        </Button>
+                        <Button onClick={()=>handelBlock(item)} variant="contained" color="error" size="small">
+                            Block
                         </Button>
                     </div>
                 </div>

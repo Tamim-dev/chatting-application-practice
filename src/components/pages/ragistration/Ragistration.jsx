@@ -143,7 +143,7 @@ const Ragistration = () => {
                         type={values.eye ? "text" : "password"}
                     />
                     <div
-                        className="eye"
+                        className="eyeR"
                         onClick={()=>setValues({ ...values, eye: !values.eye })}
                     >
                         {values.eye ? <PiEyeBold /> : <PiEyeClosedBold />}
