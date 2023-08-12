@@ -16,7 +16,7 @@ const Groups = () => {
     let userList = useSelector((state) => state.loggedUser.loginUser);
     let [myGroup, setMyGroup] = useState([]);
     let [GroupJoinReq, setGroupJoinReq] = useState([]);
-
+    let [members, setMembers] = useState([]);
 
     useEffect(() => {
         onValue(ref(db, "groups/"), (snapshot) => {
@@ -32,21 +32,35 @@ const Groups = () => {
         onValue(ref(db, "groupjoinreq/"), (snapshot) => {
             let arr = [];
             snapshot.forEach((item) => {
-                // if(item.val().userId == userList.uid){
-
+                if (item.val().userId == userList.uid) {
                     arr.push(item.val().groupId);
-                // }
+                }
             });
             setGroupJoinReq(arr);
+        });
+
+        onValue(ref(db, "members/"), (snapshot) => {
+            let arr = [];
+            snapshot.forEach((item) => {
+                if (item.val().userId == userList.uid) {
+                    arr.push(item.val().groupId);
+                }
+            });
+            setMembers(arr);
+            console.log(arr);
         });
     }, []);
 
     let handelJoinReq = (item) => {
         set(push(ref(db, "groupjoinreq/")), {
             userId: userList.uid,
+            userName: userList.displayName,
             groupId: item.id,
+            groupName: item.groupName,
+            groupTagline: item.groupTagline,
+            adminName: item.adminName,
+            adminId: item.adminId,
         });
-       
     };
 
     return (
@@ -65,21 +79,27 @@ const Groups = () => {
                         <p style={{ fontSize: "12px" }}>{item.groupTagline}</p>
                     </div>
                     <div className="profilebtn">
-                        {GroupJoinReq.indexOf(item.id) != -1 ?
-                        <Button
-                            variant="contained"
-                            size="small"
-                        >
-                            Requset
-                        </Button>
-                        :
-                        <Button
-                            onClick={() => handelJoinReq(item)}
-                            variant="contained"
-                            size="small"
-                        >
-                            Join
-                        </Button>}
+                        {GroupJoinReq.indexOf(item.id) != -1 ? (
+                            <Button variant="contained" size="small">
+                                Requset
+                            </Button>
+                        ) : members.indexOf(item.id) != -1 ? (
+                            <Button
+                                variant="contained"
+                                size="small"
+                                color="success"
+                            >
+                                Joined
+                            </Button>
+                        ) : (
+                            <Button
+                                onClick={() => handelJoinReq(item)}
+                                variant="contained"
+                                size="small"
+                            >
+                                Join
+                            </Button>
+                        )}
                     </div>
                 </div>
             ))}
